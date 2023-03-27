@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql:latest
+    container_name: mysql
+    restart: always
+    ports:
+      - 3306:3306
+    environment:
+      MYSQL_ROOT_PASSWORD: myrootpassword
+      MYSQL_DATABASE: nestjs-prisma-api
+      MYSQL_ROOT_HOST: '%'
+    volumes:
+      - api-mysql-data:/var/lib/mysql/
+
+volumes:
+  api-mysql-data:
