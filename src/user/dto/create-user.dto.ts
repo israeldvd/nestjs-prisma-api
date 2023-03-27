@@ -7,9 +7,15 @@ import {
   Matches,
   MaxLength,
   MinLength,
+  Length,
 } from 'class-validator';
+import { Type } from 'class-transformer';
 
 export class CreateUserDto extends User {
+  @IsString()
+  @Length(36, 36)
+  id: string;
+
   @IsEmail()
   email: string;
 
@@ -39,9 +45,11 @@ export class CreateUserDto extends User {
   @IsString()
   recoverToken?: string;
 
+  @Type(() => Date)
   @IsDate()
   createdAt: Date;
 
+  @Type(() => Date)
   @IsDate()
   updatedAt: Date;
 }
