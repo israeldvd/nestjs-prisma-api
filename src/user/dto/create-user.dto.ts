@@ -8,6 +8,7 @@ import {
   MaxLength,
   MinLength,
   Length,
+  IsOptional,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
@@ -31,9 +32,11 @@ export class CreateUserDto extends User {
   name: string;
 
   @IsString()
+  @IsOptional()
   role: string;
 
   @IsBoolean()
+  @IsOptional()
   status: boolean;
 
   @IsString()
@@ -43,13 +46,16 @@ export class CreateUserDto extends User {
   confirmationToken?: string;
 
   @IsString()
+  @IsOptional()
   recoverToken?: string;
 
   @Type(() => Date)
   @IsDate()
+  @IsOptional()
   createdAt: Date;
 
   @Type(() => Date)
   @IsDate()
+  @IsOptional()
   updatedAt: Date;
 }
