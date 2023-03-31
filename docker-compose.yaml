@@ -10,6 +10,7 @@ services:
       - .env
     environment:
       - DATABASE_URL="mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@mysql:3307/${MYSQL_DB}"
+    command: npm run start:dev
     ports:
       - 3000:3000
     depends_on:
@@ -20,10 +21,12 @@ services:
     restart: always
     ports:
       - 3307:3306
+      - 33070:33060
     environment:
       MYSQL_ROOT_PASSWORD: myrootpassword
       MYSQL_DATABASE: nestjs-prisma-api
       MYSQL_ROOT_HOST: '%'
+      TZ: 'America/Sao_Paulo'
     volumes:
       - api-mysql-data:/var/lib/mysql/
 
