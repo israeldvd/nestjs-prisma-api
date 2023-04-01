@@ -1,5 +1,8 @@
 FROM node:lts-alpine AS development
 
+# Define the user from the image
+USER node
+
 # create app directory
 WORKDIR /p0037/src/app
 
@@ -10,6 +13,7 @@ COPY --chown=node:node package*.json ./
 
 # Install app dependencies using this command (use npm ci for production)
 # that comes before lifting up the API
+RUN npm rebuild bcrypt --build-from-source
 RUN npm install
 
 # Bundle app source
@@ -17,9 +21,6 @@ COPY --chown=node:node . .
 
 # Generate Prisma database client code
 RUN npm run prisma:generate
-
-# Define the user from the image
-USER node
 
 # Expose the app process' port
 EXPOSE 3000
