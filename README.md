@@ -36,8 +36,8 @@ MYSQL_PASSWORD=myrootpassword
 DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@mysql:3306/${MYSQL_DB}
 ```
 
-If the 'api' service communicates with a _container_ from another _container_, use port 3306, as presented above, given the network interconnect; however, because of port mapping, or to access with an external client, use 3307—a manual setting for this project—or change the 'docker-compose
-yml' file.
+If the 'api' service communicates with a _container_ from another _container_, use port 3306, as presented above, given the network interconnect; however, because of port mapping, or to access with an external client, use 3307—a manual setting for this project—or change the `docker-compose
+yml` file.
 
 ## License
 
