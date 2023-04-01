@@ -23,6 +23,19 @@ $ npm run start:dev
 $ npm run start:prod
 ```
 
+## Variáveis de ambiente
+
+Defina um arquivo `.env` contendo as variáveis de ambiente necessárias. Por exemplo, a aplicação pode ter:
+
+```bash
+# Database config
+MYSQL_DB=nestjs-prisma-api
+MYSQL_USER=root
+MYSQL_PASSWORD=myrootpassword
+
+DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@localhost:3307/${MYSQL_DB}
+```
+
 ## License
 
 This project is [MIT licensed](LICENSE).
