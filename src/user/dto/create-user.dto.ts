@@ -31,12 +31,12 @@ export class CreateUserDto extends User {
   @IsString()
   name: string;
 
-  @IsString()
   @IsOptional()
+  @IsString()
   role: string;
 
-  @IsBoolean()
   @IsOptional()
+  @IsBoolean()
   status: boolean;
 
   @IsString()
@@ -45,17 +45,17 @@ export class CreateUserDto extends User {
   @IsString()
   confirmationToken?: string;
 
-  @IsString()
   @IsOptional()
+  @IsString()
   recoverToken?: string;
 
+  @IsOptional()
   @Type(() => Date)
   @IsDate()
-  @IsOptional()
   createdAt: Date;
 
+  @IsOptional()
   @Type(() => Date)
   @IsDate()
-  @IsOptional()
   updatedAt: Date;
 }
