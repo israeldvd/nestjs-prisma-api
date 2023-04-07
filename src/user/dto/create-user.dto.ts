@@ -7,14 +7,14 @@ import {
   Matches,
   MaxLength,
   MinLength,
-  Length,
   IsOptional,
+  IsUUID,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 
 export class CreateUserDto extends User {
-  @IsString()
-  @Length(36, 36)
+  @IsOptional()
+  @IsUUID()
   id: string;
 
   @IsEmail()
