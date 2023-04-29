@@ -25,7 +25,7 @@ $ npm run start:prod
 
 ## Variáveis de ambiente
 
-Define a *_dotenv_* file (`.env`) having the necessary environment variables. For instance, it could come with the following:
+Define a _dotenv_ file (`.env`) having the necessary environment variables. For instance, it could come with the following:
 
 ```bash
 # Database config
@@ -33,7 +33,8 @@ MYSQL_DB=nestjs-prisma-api
 MYSQL_USER=root
 MYSQL_PASSWORD=myrootpassword
 
-DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@mysql:3306/${MYSQL_DB}
+MYSQL_PORT=3306
+DATABASE_URL=mysql://${MYSQL_USER}:${MYSQL_PASSWORD}@mysql:${MYSQL_PORT}/${MYSQL_DB}
 ```
 
 If the 'api' service communicates with a _container_ from another _container_, use port 3306, as presented above, given the network interconnect; however, because of port mapping, or to access with an external client, use 3307—a manual setting for this project—or change the `docker-compose
