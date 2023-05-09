@@ -1,6 +1,6 @@
 {
   "name": "nestjs-prisma-api",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Building an API using NestJS, Prisma and Docker.",
   "author": "Israel David",
   "private": true,
