@@ -1,17 +1,17 @@
+import { Prisma } from '@prisma/client';
+import { Type } from 'class-transformer';
 import {
-  IsEmail,
-  IsString,
   IsBoolean,
   IsDate,
+  IsEmail,
+  IsEnum,
+  IsOptional,
+  IsString,
+  IsUUID,
   Matches,
   MaxLength,
   MinLength,
-  IsOptional,
-  IsUUID,
-  IsEnum,
 } from 'class-validator';
-import { Type } from 'class-transformer';
-import { Prisma } from '@prisma/client';
 import { UserRole } from '../enums/user-roles.enum';
 
 export class CreateUserDto implements Prisma.UserCreateInput {
