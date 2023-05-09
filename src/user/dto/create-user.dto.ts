@@ -8,9 +8,11 @@ import {
   MinLength,
   IsOptional,
   IsUUID,
+  IsEnum,
 } from 'class-validator';
 import { Type } from 'class-transformer';
 import { Prisma } from '@prisma/client';
+import { UserRole } from '../enums/user-roles.enum';
 
 export class CreateUserDto implements Prisma.UserCreateInput {
   @IsOptional()
@@ -31,8 +33,8 @@ export class CreateUserDto implements Prisma.UserCreateInput {
   @IsString()
   name: string;
 
-  @IsString()
-  role: string;
+  @IsEnum(UserRole)
+  role: UserRole;
 
   @IsOptional()
   @IsBoolean()
