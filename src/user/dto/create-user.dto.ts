@@ -1,18 +1,20 @@
-import { User } from '../entities/user.entity';
+import { Prisma } from '@prisma/client';
+import { Type } from 'class-transformer';
 import {
-  IsEmail,
-  IsString,
   IsBoolean,
   IsDate,
+  IsEmail,
+  IsEnum,
+  IsOptional,
+  IsString,
+  IsUUID,
   Matches,
   MaxLength,
   MinLength,
-  IsOptional,
-  IsUUID,
 } from 'class-validator';
-import { Type } from 'class-transformer';
+import { UserRole } from '../enums/user-roles.enum';
 
-export class CreateUserDto extends User {
+export class CreateUserDto implements Prisma.UserCreateInput {
   @IsOptional()
   @IsUUID()
   id: string;
@@ -31,9 +33,8 @@ export class CreateUserDto extends User {
   @IsString()
   name: string;
 
-  @IsOptional()
-  @IsString()
-  role: string;
+  @IsEnum(UserRole)
+  role: UserRole;
 
   @IsOptional()
   @IsBoolean()
@@ -42,12 +43,13 @@ export class CreateUserDto extends User {
   @IsString()
   salt: string;
 
+  @IsOptional()
   @IsString()
-  confirmationToken?: string;
+  confirmationToken: string;
 
   @IsOptional()
   @IsString()
-  recoverToken?: string;
+  recoverToken: string;
 
   @IsOptional()
   @Type(() => Date)
