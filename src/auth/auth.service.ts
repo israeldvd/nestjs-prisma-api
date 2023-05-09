@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { JwtService } from '@nestjs/jwt';
+import { Prisma } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import { UserService } from 'src/user/user.service';
 import { UserPayload } from './models/UserPayload';
-import { User } from 'src/user/entities/user.entity';
 import { UserToken } from './models/UserToken';
 
 @Injectable()
@@ -13,7 +13,7 @@ export class AuthService {
     private readonly jwtService: JwtService,
   ) {}
 
-  login(user: User): UserToken {
+  login(user: Prisma.UserCreateInput): UserToken {
     const payload: UserPayload = {
       sub: user.id,
       email: user.email,
