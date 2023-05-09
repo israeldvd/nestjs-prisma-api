@@ -11,8 +11,9 @@ import {
   IsUUID,
 } from 'class-validator';
 import { Type } from 'class-transformer';
+import { Prisma } from '@prisma/client';
 
-export class CreateUserDto extends User {
+export class CreateUserDto extends User implements Prisma.UserCreateInput {
   @IsOptional()
   @IsUUID()
   id: string;
