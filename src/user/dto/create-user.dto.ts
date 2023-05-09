@@ -1,4 +1,3 @@
-import { User } from '../entities/user.entity';
 import {
   IsEmail,
   IsString,
@@ -13,7 +12,7 @@ import {
 import { Type } from 'class-transformer';
 import { Prisma } from '@prisma/client';
 
-export class CreateUserDto extends User implements Prisma.UserCreateInput {
+export class CreateUserDto implements Prisma.UserCreateInput {
   @IsOptional()
   @IsUUID()
   id: string;
