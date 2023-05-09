@@ -5,7 +5,7 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { Prisma } from '@prisma/client';
+import { LoginUserDto } from 'src/user/dto/login-user.dto';
 import { AuthService } from './auth.service';
 import { CurrentUser } from './decorators/current-user.decorator';
 import { IsPublic } from './decorators/is-public.decorator';
@@ -19,7 +19,7 @@ export class AuthController {
   @Post('login')
   @HttpCode(HttpStatus.OK)
   @UseGuards(LocalAuthGuard)
-  login(@CurrentUser() user: Prisma.UserCreateInput) {
+  login(@CurrentUser() user: LoginUserDto) {
     return this.authService.login(user);
   }
 }
