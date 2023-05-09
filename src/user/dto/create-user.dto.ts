@@ -31,7 +31,6 @@ export class CreateUserDto implements Prisma.UserCreateInput {
   @IsString()
   name: string;
 
-  @IsOptional()
   @IsString()
   role: string;
 
@@ -42,12 +41,13 @@ export class CreateUserDto implements Prisma.UserCreateInput {
   @IsString()
   salt: string;
 
+  @IsOptional()
   @IsString()
-  confirmationToken?: string;
+  confirmationToken: string;
 
   @IsOptional()
   @IsString()
-  recoverToken?: string;
+  recoverToken: string;
 
   @IsOptional()
   @Type(() => Date)
