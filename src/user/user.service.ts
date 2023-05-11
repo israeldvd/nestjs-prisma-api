@@ -10,13 +10,15 @@ export class UserService {
   constructor(private readonly prisma: PrismaService) {}
 
   async create(createUserDto: CreateUserDto) {
-    const confirmationToken =
-      createUserDto.confirmationToken || crypto.randomBytes(32).toString('hex');
+    const confirmationToken = crypto.randomBytes(32).toString('hex');
+    const salt = await bcrypt.genSalt();
+    const password = await bcrypt.hash(createUserDto.password, 11);
 
     const data: Prisma.UserCreateInput = {
       ...createUserDto,
       confirmationToken,
-      password: await bcrypt.hash(createUserDto.password, 11),
+      salt,
+      password,
     };
 
     const createdUser = await this.prisma.user.create({ data });
@@ -24,6 +26,7 @@ export class UserService {
     return {
       ...createdUser,
       password: undefined,
+      salt: undefined,
     };
   }
 

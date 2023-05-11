@@ -1,24 +1,15 @@
-import { Prisma } from '@prisma/client';
-import { Type } from 'class-transformer';
 import {
-  IsBoolean,
-  IsDate,
   IsEmail,
   IsEnum,
-  IsOptional,
   IsString,
-  IsUUID,
   Matches,
   MaxLength,
   MinLength,
 } from 'class-validator';
 import { UserRole } from '../enums/user-roles.enum';
+import { User } from '../entities/user.entity';
 
-export class CreateUserDto implements Prisma.UserCreateInput {
-  @IsOptional()
-  @IsUUID()
-  id: string;
-
+export class CreateUserDto extends User {
   @IsEmail()
   email: string;
 
@@ -35,29 +26,4 @@ export class CreateUserDto implements Prisma.UserCreateInput {
 
   @IsEnum(UserRole)
   role: UserRole;
-
-  @IsOptional()
-  @IsBoolean()
-  status: boolean;
-
-  @IsString()
-  salt: string;
-
-  @IsOptional()
-  @IsString()
-  confirmationToken: string;
-
-  @IsOptional()
-  @IsString()
-  recoverToken: string;
-
-  @IsOptional()
-  @Type(() => Date)
-  @IsDate()
-  createdAt: Date;
-
-  @IsOptional()
-  @Type(() => Date)
-  @IsDate()
-  updatedAt: Date;
 }
