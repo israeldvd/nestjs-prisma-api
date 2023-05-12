@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { ForbiddenException, Injectable } from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
@@ -7,7 +7,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 
 @Injectable()
 export class UserService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prisma: PrismaService) { }
 
   async create(createUserDto: CreateUserDto) {
     const confirmationToken = crypto.randomBytes(32).toString('hex');
@@ -21,13 +21,20 @@ export class UserService {
       password,
     };
 
-    const createdUser = await this.prisma.user.create({ data });
+    try {
+      const createdUser = await this.prisma.user.create({ data });
 
-    return {
-      ...createdUser,
-      password: undefined,
-      salt: undefined,
-    };
+      return {
+        ...createdUser,
+        password: undefined,
+        salt: undefined,
+      };
+    } catch (error: any) {
+      if (error.code == 'P2002') {
+        throw new ForbiddenException('User already exists.');
+      }
+      throw error;
+    }
   }
 
   findAll() {
