@@ -1,4 +1,8 @@
-import { ForbiddenException, Injectable } from '@nestjs/common';
+import {
+  ForbiddenException,
+  Injectable,
+  InternalServerErrorException,
+} from '@nestjs/common';
 import { Prisma } from '@prisma/client';
 import * as bcrypt from 'bcrypt';
 import * as crypto from 'crypto';
@@ -33,6 +37,10 @@ export class UserService {
     } catch (error: any) {
       if (error.code == 'P2002') {
         throw new ForbiddenException('User already exists.');
+      }
+      if (error instanceof InternalServerErrorException) {
+        error.message = 'Something went wrong while creating this user.';
+        throw error;
       }
       throw error;
     }
