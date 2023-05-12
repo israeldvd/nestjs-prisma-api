@@ -1,24 +1,13 @@
-import {
-  IsEmail,
-  IsEnum,
-  IsString,
-  Matches,
-  MaxLength,
-  MinLength,
-} from 'class-validator';
-import { UserRole } from '../enums/user-roles.enum';
+import { IsEmail, IsEnum, IsString, IsStrongPassword } from 'class-validator';
+import { strongPasswordOptions } from '../validation/strong-password.validation';
 import { User } from '../entities/user.entity';
+import { UserRole } from '../enums/user-roles.enum';
 
 export class CreateUserDto extends User {
   @IsEmail()
   email: string;
 
-  @IsString()
-  @MinLength(8)
-  @MaxLength(20)
-  @Matches(/((?=.*\d)|(?=.*\W+))(?![.\n])(?=.*[A-Z])(?=.*[a-z]).*$/, {
-    message: 'password too weak',
-  })
+  @IsStrongPassword(strongPasswordOptions)
   password: string;
 
   @IsString()
