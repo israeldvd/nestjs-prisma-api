@@ -25,9 +25,13 @@ $ npm run start:prod
 
 ## Variáveis de ambiente
 
-Define a _dotenv_ file (`.env`) having the necessary environment variables. For instance, it could come with the following:
+Define a _dotenv_ file (`.env`) having the necessary environment variables. For instance, it could come with the following (change accordingly):
 
 ```bash
+# JWT config
+JWT=your-secret
+JWT_EXPIRATION_TIME=10h
+
 # Database config
 MYSQL_DB=nestjs-prisma-api
 MYSQL_USER=root
