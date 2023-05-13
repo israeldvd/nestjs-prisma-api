@@ -10,6 +10,9 @@ export class CreateUserDto extends User {
   @IsStrongPassword(strongPasswordOptions)
   password: string;
 
+  @IsStrongPassword(strongPasswordOptions)
+  confirmationPassword: string;
+
   @IsString()
   name: string;
 
