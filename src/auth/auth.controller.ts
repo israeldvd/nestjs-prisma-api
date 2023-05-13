@@ -30,8 +30,12 @@ export class AuthController {
   @IsPublic()
   @Post('signup')
   @HttpCode(HttpStatus.OK)
-  signUp(@Body() signupUserDto: SignupUserDto) {
+  async signUp(
+    @Body() signupUserDto: SignupUserDto,
+  ): Promise<{ message: string }> {
     const newUser: CreateUserDto = { ...signupUserDto, role: UserRole.User };
-    return this.authService.signup(newUser);
+    await this.authService.signup(newUser);
+
+    return { message: 'User signed-up successfully.' };
   }
 }
