@@ -23,14 +23,14 @@ export class AuthController {
   @Post('login')
   @HttpCode(HttpStatus.OK)
   @UseGuards(LocalAuthGuard)
-  login(@CurrentUser() user: LoginUserDto) {
+  logIn(@CurrentUser() user: LoginUserDto) {
     return this.authService.login(user);
   }
 
   @IsPublic()
   @Post('signup')
   @HttpCode(HttpStatus.OK)
-  signup(@Body() signupUserDto: SignupUserDto) {
+  signUp(@Body() signupUserDto: SignupUserDto) {
     const newUser: CreateUserDto = { ...signupUserDto, role: UserRole.User };
     return this.authService.signup(newUser);
   }
